@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queue Visualization</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #queue-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .queue-element {
+            width: 50px;
+            height: 50px;
+            background-color: #4caf50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 5px;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="queue-container">
+        <div id="queue"></div>
+        <button onclick="enqueue()">Enqueue</button>
+        <button onclick="dequeue()">Dequeue</button>
+    </div>
+
+    <script>
+        let queue = [];
+
+        function renderQueue() {
+            const queueContainer = document.getElementById('queue');
+            queueContainer.innerHTML = '';
+            for (let i = 0; i < queue.length; i++) {
+                const element = document.createElement('div');
+                element.className = 'queue-element';
+                element.innerText = queue[i];
+                queueContainer.appendChild(element);
+            }
+        }
+
+        function enqueue() {
+            const element = prompt('Enter element to enqueue:');
+            if (element !== null) {
+                queue.push(element);
+                renderQueue();
+            }
+        }
+
+        function dequeue() {
+            if (queue.length === 0) {
+                alert('Queue is empty');
+            } else {
+                const removedElement = queue.shift();
+                alert(`Dequeued element: ${removedElement}`);
+                renderQueue();
+            }
+        }
+
+        renderQueue(); // Initial rendering
+    </script>
+</body>
+</html>
